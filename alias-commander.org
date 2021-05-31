@@ -1,0 +1,92 @@
+* Alias commander
+** Class
+   :PROPERTIES:
+   :header-args: :tangle ac.rb :results output :exports code :padline no
+   :END:
+
+   AliasCommander is a class for collectively assigning shell alias commands.
+   
+    #+name: AliasCommander
+    #+begin_src ruby :noweb yes
+      class AliasCommander
+
+        <<definitions>>
+      end
+    #+end_src
+    
+** Definitions
+
+   #+name: definitions
+   #+begin_src ruby :noweb yes
+     <<initialize>>
+
+     <<filepath>>
+  
+     <<alias_list>>
+
+     <<clear>>
+
+     <<write>>
+   #+end_src
+   
+*** initialize
+    
+    #+name: initialize
+    #+begin_src ruby 
+      def initialize(aliases, alias_path = '.zsh_aliases.ac')
+        @aliases = aliases
+        @alias_path = alias_path
+      end
+    #+end_src
+
+    - aliases :: Array of Arrays
+      - array item ::
+        - name :: String
+        - command :: String
+
+*** filepath
+
+    #+name: filepath
+    #+begin_src ruby
+      def filepath
+        "#{Dir.home.to_s}/#{@alias_path}"
+      end
+    #+end_src
+    
+*** alias_list
+   
+    #+name: alias_list
+    #+begin_src ruby
+      def alias_list
+        @aliases.map do |a|
+          name, command = a[0..1]
+          "alias #{name}='#{command}'"
+        end
+      end
+    #+end_src
+   
+*** clear_aliases
+
+    #+name: clear
+    #+begin_src ruby
+      def clear
+        File.write("#{filepath}", '')
+      end
+    #+end_src
+
+    #+RESULTS: clear
+
+*** write_aliases   
+
+    #+name: write
+    #+begin_src ruby 
+      def write
+        clear
+        alias_list.each do |a|
+          File.open("#{filepath}", 'a') do |file|
+            file.write "#{a}\n"
+          end
+        end
+      end
+    #+end_src
+

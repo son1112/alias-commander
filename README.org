@@ -1,0 +1,51 @@
+#+TITLE: Alias Commander
+
+* Setup
+
+  Aliases defined by Alias Commander will be stored separately in ~/.zsh_aliases.ac~.
+  Add the following command to your ~.zshrc~ ensure zsh loads these aliases.
+  
+  #+name: configure
+  #+begin_src shell :results silent :exports code
+    echo "if [ -f ~/.zsh_aliases.ac ]; then . ~/.zsh_aliases.ac; fi" >> ~/.zshrc
+  #+end_src
+
+  - [ ] TODO :: set alternate alias file definition
+  
+** Usage
+
+   #+name: alias-table
+   | name   | command  |
+   |--------+----------|
+   | foo    | echo bar |
+   | bar    | echo baz |
+   | baz    | echo zol |
+   | abc    | echo bb  |
+   | lsss   | ls       |
+   | lsss   | ls -a    |
+   | lskjdf | lksdfj   |
+   | flksjd | lsakjf   |
+   | lskdjf | lkdf     |
+
+   AliasCommander works well with org! Simply define alias names and commands
+   in an org-table, define a ruby src block using your alias-table as a ~:var~
+   header, providing as an argument to ~AliasCommander.new(aliases).write~
+
+   To start you off, try out the following:
+   
+   - Ensure proper [[Setup]]
+   - Open [[./alias-commander.org]] in ~org-mode~
+     - Optionally make changes to source blocks
+     - Run ~org-babel-tangle~ with ~C-c C-v t~
+   - Open [[./aliases.org]]
+     - Define aliases in the provided table
+
+       #+name: example
+       | name | command  |
+       |------+----------|
+       | foo  | echo bar |
+
+     - Run the provided src block to execute an update of the shell alias file
+   
+
+

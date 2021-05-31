@@ -1,0 +1,21 @@
+#+name: alias-table
+| name    | command   |
+|---------+-----------|
+| foo     | echo bar  |
+| bar     | echo baz  |
+| abc     | echo bb   |
+| lsss    | ls        |
+| lskjdf  | lksdfj    |
+| flksjd  | lsakjf    |
+| lskdjf  | lkdf      |
+| flksjdf | lskdjf    |
+| a       | b         |
+| mommy   | echo love |
+
+#+name: ruby-execute-with-alias-list
+#+begin_src ruby :var aliases=alias-table :results silent
+  require './ac.rb'
+
+  ac = AliasCommander.new(aliases)
+  ac.write
+#+end_src
